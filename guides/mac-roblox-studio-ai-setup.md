@@ -2,7 +2,7 @@
 
 A follow-along guide for connecting AI coding agents (Claude Code and OpenAI Codex CLI) to Roblox Studio's built-in MCP server on macOS, based on Crusherfire's video ["10x Your Roblox Studio Productivity – Claude Code & OpenAI Codex Integration Guide"](https://www.youtube.com/watch?v=6kcWSMJFaS4) and the [official Roblox MCP docs](https://create.roblox.com/docs/studio/mcp).
 
-Once connected, the AI can explore your game's data model, write and edit scripts, run Luau code directly in Studio, insert models, and help test your game — all from a terminal chat.
+Once connected, the AI can explore your game's data model, write and edit scripts, run Luau code directly in Studio, insert models, and help test your game — all from a terminal chat. Section 6 covers turning on autonomous ("auto") mode so it works without approval prompts.
 
 **Estimated time:** 15–30 minutes.
 
@@ -139,7 +139,19 @@ Changes the AI makes go through Studio's **ChangeHistoryService**, so **Cmd+Z un
 
 ---
 
-## 6. Troubleshooting
+## 6. Coding on auto (autonomous mode)
+
+Three ways to let Claude Code work without approving every action, from safest to most hands-off:
+
+1. **Allowlist just the Studio tools** — type `/permissions` in Claude Code and add `mcp__Roblox_Studio__*` to the allow list. Studio actions never prompt, but riskier things (shell commands, file deletes) still do. Good middle ground.
+2. **Auto-accept mode (recommended)** — press **Shift+Tab** in Claude Code to cycle permission modes until it shows `auto-accept edits on`. Claude writes/edits files and drives Studio without stopping to ask.
+3. **Full-auto ("yolo") mode** — start with `claude --dangerously-skip-permissions`. Zero prompts at all.
+
+> **Before a long autonomous run:** save/publish your place (or commit it if you use Rojo). Cmd+Z undoes AI changes, but a save point is cheaper than untangling a big session.
+
+---
+
+## 7. Troubleshooting
 
 | Problem | Fix |
 | --- | --- |
